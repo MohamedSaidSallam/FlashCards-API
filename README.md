@@ -20,7 +20,7 @@ npm install
 duplicate the ``.env.example`` file and rename to ``.env`` and fill in the required fields
 
 | Field Name | Required Value                |
-| ---------- | ----------------------------- -|
+| ---------- | ----------------------------- |
 | DB_STRING  | MongoDB Connection String     |
 | PORT       | Port Number to run the API on |
 
