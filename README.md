@@ -135,10 +135,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [license-image]: https://img.shields.io/badge/License-MIT-brightgreen.svg
 [license-url]: https://opensource.org/licenses/MIT
 
-[github_release_badge]: https://img.shields.io/github/v/release/TheDigitalPhoenixX/Flashcards.svg?style=flat&include_prereleases
-[github_release_link]: https://github.com/TheDigitalPhoenixX/Flashcards/releases
+[github_release_badge]: https://img.shields.io/github/v/release/TheDigitalPhoenixX/FlashCards-API.svg?style=flat&include_prereleases
+[github_release_link]: https://github.com/TheDigitalPhoenixX/FlashCards-API/releases
 
-[github-contributors]: https://github.com/TheDigitalPhoenixX/Flashcards/contributors
-[github-tags]: https://github.com/TheDigitalPhoenixX/Flashcards/tags
+[github-contributors]: https://github.com/TheDigitalPhoenixX/FlashCards-API/contributors
+[github-tags]: https://github.com/TheDigitalPhoenixX/FlashCards-API/tags
 
-[github-flashcards]: https://github.com/TheDigitalPhoenixX/Flashcards
+[github-flashcards]: https://github.com/TheDigitalPhoenixX/FlashCards-API
