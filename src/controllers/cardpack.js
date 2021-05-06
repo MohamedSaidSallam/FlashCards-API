@@ -1,5 +1,17 @@
-const Cardpack = require("../models/cardpack");
+const {
+  Cardpack,
+  ID_LENGTH
+} = require("../models/cardpack");
 
+function getRandomID() {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length; // 62
+  for (let i = 0; i < ID_LENGTH; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 exports.create = (req, res) => {
 
@@ -13,6 +25,7 @@ exports.create = (req, res) => {
   const cardpack = new Cardpack({
     title: data.title,
     cards: data.cards,
+    id: data.id || getRandomID()
   });
   cardpack
     .save()
@@ -42,7 +55,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.findOne = (req, res) => {
-  Cardpack.findById(req.params.id)
+  Cardpack.find({id: req.params.id})
     .then((Cardpack) => {
       if (!Cardpack) {
         return res.status(404).send({
@@ -60,12 +73,15 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
   const data = req.body
-  if (!data.title || !data.cards) {
+  console.log(data.title)
+  console.log(data.cards)
+  console.log(data.id)
+  if (!data.title || !data.cards || !data.id) {
     return res.status(400).send({
       message: "Required field can not be empty",
     });
   }
-  Cardpack.findByIdAndUpdate(req.params.id, req.body, {
+  Cardpack.findOneAndUpdate({id: req.params.id}, req.body, {
       new: true
     })
     .then((Cardpack) => {
@@ -84,7 +100,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Cardpack.findByIdAndRemove(req.params.id)
+  Cardpack.findOneAndRemove({id: req.params.id})
     .then((Cardpack) => {
       if (!Cardpack) {
         return res.status(404).send({

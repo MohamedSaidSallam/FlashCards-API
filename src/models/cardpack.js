@@ -27,7 +27,21 @@ const cardSchema = new mongoose.Schema({
 }, {
   strict: true,
 });
+
+const ID_LENGTH = 5;
+
 const cardpackSchema = new mongoose.Schema({
+  id: {
+    desc: "card pack id",
+    trim: true,
+    type: String,
+    required: true,
+    index: true,
+    unique: true,
+    validate: [(id) => {
+      return id.length === ID_LENGTH
+    }, `length of id should be ${ID_LENGTH}`]
+  },
   title: {
     desc: "card pack title",
     trim: true,
@@ -48,4 +62,7 @@ const cardpackSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Cardpack", cardpackSchema);
+module.exports = {
+  Cardpack: mongoose.model("Cardpack", cardpackSchema),
+  ID_LENGTH: ID_LENGTH
+};

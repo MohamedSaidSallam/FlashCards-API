@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_STRING, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
     },
     (err) => {
         if (err) {
@@ -11,4 +13,5 @@ mongoose.connect(process.env.DB_STRING, {
             console.log('Connectd to MongoDB')
         }
     });
+// try to reconnect
 module.exports = mongoose;
