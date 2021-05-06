@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flashcards-api-deployment
+  namespace: flashcards
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flashcards-api
+  template:
+    metadata:
+      labels:
+        app: flashcards-api
+    spec:
+      containers:
+        - name: flashcards-api
+          image: digitalphoenixx/flashcards-api:latest
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT
+                  name: flashcards-api-configmap
+            - name: DB_STRING
+              valueFrom:
+                secretKeyRef:
+                  key: DB_STRING
+                  name: flashcards-api-secret
+          ports:
+            - containerPort: 8000

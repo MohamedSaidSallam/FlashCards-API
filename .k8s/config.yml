@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flashcards-api-configmap
+  namespace: flashcards
+data:
+  PORT: "8000"

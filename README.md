@@ -40,7 +40,69 @@ npm run mon
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To deploy the api to a live/production server. You can either use docker, docker-compose or K8s.
+
+### Docker
+
+Duplicate ``.env.example`` file and rename it to ``.env`` and fill in the required fields or pass it through command line arguemnts when running ``docker run``. Change the first part of the tag to your dockerhub id)
+
+```sh
+docker build -t digitalphoenixx/flashcards-api:latest .
+docker run -p 8000:8000 digitalphoenixx/flashcards-api:latest
+```
+
+Replace build tag and port used with appropriate values.
+
+### Docker-compose
+
+Duplicate the ``.env`` file and fill in the data. Replace the port number in the ``docker-compose.yml`` file with preferred port. Then run
+
+```sh
+docker-compose up
+```
+
+### K8s
+
+1) Build the image. (change the first part of the tag to your dockerhub id)
+
+    ```sh
+    docker build -t digitalphoenixx/flashcards-api:latest .
+    ```
+
+1) Change the image name in the ``.k8s/kustomization.yml`` to the tag used in the build step.
+
+1) Change the hostname in the ``.k8s/ingress.yml`` to your domain.
+
+1) Create deployment.
+
+    ```sh
+    kubectl apply -k .k8s/
+    ```
+
+1) Create the secret with the mongo connection string.
+
+    ```sh
+    kubectl create secret generic flashcards-api-secret --from-literal=DB_STRING="CONNECTION_STRING_HERE" -n flashcards
+    ```
+
+1) Check the everything is running, might take a second. Note: Ready is 1/1.
+
+    ``` sh
+    > kubectl get -n flashcards all
+
+    NAME                                             READY   STATUS    RESTARTS   AGE
+    pod/flashcards-api-deployment-79559684df-54d8c   1/1     Running   0          37s
+
+    NAME                             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+    service/flashcards-api-service   ClusterIP   10.100.135.137   <none>        8000/TCP   37s
+
+    NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/flashcards-api-deployment   1/1     1            1           37s
+
+    NAME                                                   DESIRED   CURRENT   READY   AGE
+    replicaset.apps/flashcards-api-deployment-79559684df   1         1         1       37s
+
+    ```
 
 ## Built With
 
