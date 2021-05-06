@@ -5,6 +5,8 @@
 
 API for the [Flashcard][github-flashcards] Frontend. Allows for Simple CRUD operations of cardpacks.
 
+Deployed: [flashcards-api.digitalphoenixx.live](flashcards-api.digitalphoenixx.live).
+
 View [Endpoints Docs](./docs/endpoints.md).
 
 ## Getting Started
