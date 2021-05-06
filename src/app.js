@@ -24,4 +24,6 @@ app.use(
 app.use("/", router);
 app.use("/cardpacks", require("./routes/cardpack"));
 
-app.listen(process.env.port);
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port: ${process.env.PORT}`);
+  });
